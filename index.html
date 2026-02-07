@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>In Loving Memory of Lenga Nguyen</title>
+  <meta name="description" content="Memorial website celebrating the life of Lenga Nguyen — mother, translator, storyteller, adventurer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1f2421;
+      --muted: #5a6b63;
+      --sand: #f5f0e7;
+      --sage: #c7d4c8;
+      --deep: #0f2c2b;
+      --accent: #b56f4a;
+      --paper: #fbfaf7;
+      --shadow: rgba(10, 20, 18, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fdfaf5 0%, #f7f1e8 60%, #f2ece2 100%);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-weight: 600;
+      margin: 0 0 0.4rem 0;
+      letter-spacing: 0.4px;
+    }
+
+    p { margin: 0 0 1rem 0; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      height: 100vh;
+      display: grid;
+      place-items: end center;
+      text-align: center;
+      color: #fdfcf9;
+      padding: 6rem 1.5rem 5rem;
+      background: url("20250719_162101_preview.jpeg") center/cover no-repeat;
+    }
+
+    .hero-overlay {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 34, 33, 0.35), rgba(16, 34, 33, 0.8)),
+                  radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 40%),
+                  radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.08), transparent 40%);
+      opacity: var(--hero-dim, 0);
+      transition: opacity 0.1s linear;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 820px;
+      z-index: 1;
+      opacity: var(--hero-text-opacity, 0);
+      transform: translateY(var(--hero-text-translate, 24px));
+      transition: opacity 0.1s linear, transform 0.1s linear;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      text-transform: none;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      margin-top: 0.8rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero .dates {
+      margin-top: 1.4rem;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .content {
+      max-width: 980px;
+      margin: -3rem auto 4rem;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .card {
+      background: var(--paper);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 18px 40px var(--shadow);
+      border: 1px solid rgba(31, 36, 33, 0.08);
+      overflow: visible;
+    }
+
+    .section {
+      margin-top: 2.8rem;
+    }
+
+    .section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--deep);
+    }
+
+    .section .lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .story-image {
+      margin: 1.8rem 0 2.2rem;
+    }
+
+    .story-image img {
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+      box-shadow: 0 12px 28px rgba(20, 30, 25, 0.16);
+    }
+
+    .photo-grid .photo-tile {
+      position: relative;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      box-shadow: 0 10px 24px rgba(20, 30, 25, 0.16);
+    }
+
+    .photo-grid .photo-tile img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      object-fit: cover;
+      box-shadow: none;
+    }
+
+    .story-image figcaption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      text-align: center;
+    }
+
+    .quote {
+      background: linear-gradient(135deg, rgba(181, 111, 74, 0.12), rgba(181, 111, 74, 0.02));
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.4rem;
+      border-radius: 16px;
+      font-style: italic;
+      color: #4a3b33;
+      margin: 1.6rem 0;
+    }
+
+    .aside-email {
+      background: #f8f6f1;
+      border: 1px solid rgba(31, 36, 33, 0.12);
+      border-radius: 18px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 10px 24px rgba(20, 30, 25, 0.12);
+      max-width: min(520px, calc(100vw - 2.5rem));
+      float: right;
+      margin: 0.2rem calc(-1 * clamp(0px, (100vw - 980px) / 2, 240px)) 1.2rem 1.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .aside-email .email-header {
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .aside-email .email-header span {
+      display: block;
+    }
+
+    .aside-email .email-body {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 1.05rem;
+      color: #2d2b28;
+    }
+
+    .aside-email .email-body p {
+      margin: 0 0 0.9rem 0;
+    }
+
+    .aside-email .email-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .aside-email .email-ui {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b6256;
+    }
+
+    .aside-email .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c1b8aa;
+    }
+
+    .email-collapsed .email-body,
+    .email-collapsed .thread-body {
+      max-height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .email-collapsed .email-body::after,
+    .email-collapsed .thread-body::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 70px;
+      background: linear-gradient(180deg, rgba(248, 246, 241, 0), rgba(248, 246, 241, 1));
+    }
+
+    @media (max-width: 900px) {
+      .aside-email {
+        float: none;
+        max-width: 100%;
+        margin: 1rem 0 1.4rem;
+      }
+    }
+
+    .aside-thread {
+      background: #f3f1ec;
+      border: 1px solid rgba(31, 36, 33, 0.12);
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 10px 24px rgba(20, 30, 25, 0.12);
+      max-width: min(520px, calc(100vw - 2.5rem));
+      float: right;
+      margin: 0.4rem calc(-1 * clamp(0px, (100vw - 980px) / 2, 240px)) 1.2rem 1.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .aside-thread .thread-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b6256;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .aside-thread .thread-title .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c1b8aa;
+    }
+
+    .aside-thread .message {
+      background: #fffdf8;
+      border: 1px solid rgba(31, 36, 33, 0.08);
+      border-radius: 14px;
+      padding: 0.8rem 0.9rem;
+      margin-bottom: 0.8rem;
+      border-color: rgba(31, 36, 33, 0.06);
+    }
+
+    .aside-thread .message:last-child {
+      margin-bottom: 0;
+    }
+
+    .aside-thread .message-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .aside-thread .thread-body {
+      position: relative;
+    }
+
+    .aside-thread .message-body p {
+      margin: 0 0 0.8rem 0;
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 1.05rem;
+      color: #2d2b28;
+    }
+
+    .aside-thread .message-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+      .aside-thread {
+        float: none;
+        max-width: 100%;
+        margin: 1rem 0 1.4rem;
+      }
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 1.6rem;
+    }
+
+    .tagline {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      background: var(--sage);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #2c3e33;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .video-grid video {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(20, 30, 25, 0.16);
+      background: #111;
+    }
+
+    .video-grid .video-tile {
+      position: relative;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      box-shadow: 0 10px 24px rgba(20, 30, 25, 0.16);
+    }
+
+    .video-grid .video-tile video {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+      object-fit: cover;
+      background: #111;
+    }
+
+    .video-grid .video-tile::after {
+      content: "Play";
+      position: absolute;
+      inset: auto auto 12px 12px;
+      background: rgba(17, 17, 17, 0.75);
+      color: #fff;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 11, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(92vw, 1100px);
+      max-height: 90vh;
+      background: #101413;
+      border-radius: 18px;
+      padding: 1rem;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(5, 8, 7, 0.4);
+    }
+
+    .modal-content.email-modal-content {
+      background: #f8f6f1;
+      color: var(--ink);
+      padding: 1.4rem 1.6rem;
+      max-height: 90vh;
+      overflow: hidden;
+    }
+
+    .modal-content.email-modal-content .email-header {
+      margin-bottom: 0.8rem;
+    }
+
+    #modalEmail .aside-email,
+    #modalEmail .aside-thread {
+      float: none;
+      margin: 0;
+      max-width: 100%;
+      cursor: default;
+    }
+
+    #modalEmail {
+      max-height: calc(90vh - 3rem);
+      overflow: auto;
+      padding-right: 0.5rem;
+    }
+
+    .modal-content video {
+      width: 100%;
+      height: 100%;
+      max-height: calc(90vh - 2rem);
+      object-fit: contain;
+      display: block;
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: 100%;
+      max-height: calc(90vh - 2rem);
+      object-fit: contain;
+      display: block;
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 0;
+      background: #f5f0e7;
+      color: #111;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(5, 8, 7, 0.35);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem 4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .fade-in.delay-1 { animation-delay: 0.15s; }
+    .fade-in.delay-2 { animation-delay: 0.35s; }
+    .fade-in.delay-3 { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .content { margin-top: -2rem; }
+      .card { padding: 1.8rem; }
+      .hero { min-height: 100vh; height: 100vh; padding: 5rem 1.2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="tagline">A Life of Language, Adventure, and Devotion</div>
+      <h1>In Loving Memory of Lenga Nguyen</h1>
+      <div class="subtitle">Mother, Translator, Storyteller, Adventurer</div>
+      <div class="dates">1947 — 2026</div>
+    </div>
+  </header>
+
+  <main class="content">
+    <article class="card">
+      <section class="section fade-in">
+        <p class="lede">Lenga Nguyen was a woman of remarkable intellect, a sharp and playful wit, and a fierce, protective love for her family. Known to the professional world as a brilliant linguistic expert and to her online community as “Sick Duck,” she navigated life with a unique blend of global sophistication and deeply personal creativity. From her roots in Vietnam to her long career in Montreal, Lenga lived on her own terms, leaving behind a legacy of resilience and a collection of stories that captured her unique perspective on the world.</p>
+      </section>
+
+      <figure class="story-image fade-in delay-1">
+        <img src="1977_preview.jpeg" alt="Lenga Nguyen and Earl Wong together" />
+        <figcaption>Lenga and Earl Wong, together in earlier years.</figcaption>
+      </figure>
+
+      <section class="section fade-in delay-1">
+        <h2>A Career of Global Impact</h2>
+        <p>Lenga’s professional life was a testament to her mastery of language and her dedication to international service. She spent many years as a high-level translator and interpreter for the United Nations, most notably at the International Civil Aviation Organization (ICAO) in Montreal and the United Nations Environment Programme (UNEP).</p>
+        <aside class="aside-thread email-collapsed" aria-label="Email thread">
+          <div class="thread-title email-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>Email</span>
+          </div>
+          <div class="thread-body email-content">
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sick Duck · <strong>To:</strong> Nebu, Forty, Earl · <strong>Date:</strong> Aug 29, 2014</div>
+              <div class="message-body">
+                <p>Dear family,</p>
+                <p>Another stroke of luck. Ìve been offered a contract starting as soon as I get back, so I will have more money to pay whatever debts I still havẹ</p>
+                <p>I miss you guys a lot. I also miss the dogs, especially since Ìve got news that Butters isn't doing so well.</p>
+                <p>Love,<br />Mom/Lenga</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <p>Her colleagues knew her as a top-tier professional. Even after her formal retirement, her expertise in French translation was so highly regarded that she was frequently invited back for senior R-III level assignments. Beyond the world of international agencies, she was a sought-after freelancer who could bridge the gap between technical experts and local teams, once notably helping a group of French programmers navigate complex Oracle database systems. She saw her work not just as a job, but as a craft, and she often looked for ways to share her professional opportunities and wisdom with her family.</p>
+      </section>
+
+      <figure class="story-image fade-in delay-2">
+        <img src="19565048261_fb1ae2eae6_h_preview.jpeg" alt="Professional portrait" />
+        <figcaption>A life of global service and mastery of language.</figcaption>
+      </figure>
+
+      <section class="section fade-in delay-2">
+        <h2>The Creative Heart of “Sick Duck”</h2>
+        <p>While her days were spent in the precise world of technical translation, Lenga’s evenings often belonged to her creative alter-ego, “Sick Duck.” Through her blog and her email (under the alias sick.kwanyin@gmail.com), she explored her inner world with a voice that was both skeptical and deeply spiritual.</p>
+        <p>Lenga was a gifted storyteller. In her writing, such as the story “The Possession,” she explored complex themes of memory, the “bardo,” and the cultural rituals of her heritage. She had a wonderful ability to look at the world with a critical eye, often using humor to deconstruct the supernatural or the bureaucratic. While her story “Death is the End” was a work of fiction, it showcased her deep understanding of family dynamics and the sensory-rich memories of the Saigon she once knew—smoke, incense, and the “vibrating and roaring” energy of life.</p>
+        <p>Her online persona revealed other sides of her personality. She forwarded articles about science and politics with commentary—debunking creationism when Scott Adams defended it, sharing fascinating pieces about Sherlock Holmes and Asperger's. She had a particular delight in mocking scam emails, once forwarding a Nigerian prince letter with gleeful sarcasm: “Je suis riche! Riche!!!!!!!! Il ne me reste plus qu'à envoyer à cette femme si généreuse mon numéro de compte bancaire avec le mot de passe!!!!” (I'm rich! Rich! All I have to do now is send this generous woman my bank account number with the password!)</p>
+        <p>She forwarded jokes—so many jokes. Marriage counselor jokes, jokes about getting old and elaborate email chains with punchlines.</p>
+      </section>
+
+      <figure class="story-image fade-in delay-3">
+        <img src="lrg_1496581424816_0312703201_26d404bf_v1_preview.jpeg" alt="Creative spirit memory" />
+        <figcaption>The creative voice behind “Sick Duck.”</figcaption>
+      </figure>
+
+      <section class="section fade-in delay-3">
+        <h2>A Devoted Mother and Matriarch</h2>
+        <p>Above all else, Lenga was a mother. Her two sons—Nebu Pookins and Forty Nguyen—were the center of her world. She referred to them with a playful affection as her “Booboos,” and her every decision was made with their future security in mind.</p>
+        <p>She was a pragmatic matriarch who spent years planning how to best take care of her boys. Her relationship with her ex-husband, Earl Wong, remained a significant part of her life; he served as a constant in the family, acting as a partner in navigating the challenges of their children's futures.</p>
+        <aside class="aside-thread email-collapsed" aria-label="Email thread">
+          <div class="thread-title email-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>Email</span>
+          </div>
+          <div class="thread-body email-content">
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sami · <strong>To:</strong> Sick Duck · <strong>Date:</strong> May 21, 2015</div>
+              <div class="message-body">
+                <p>Hey Co 3!</p>
+                <p>I hope you're doing good! My dad just texted me to say that you're going on tour with 40 and needed someone to watch your dog.</p>
+                <p>Can you let me know what the details are and I'll see if I can help.</p>
+                <p>Thanks,</p>
+              </div>
+            </div>
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sick Duck · <strong>To:</strong> Sami · <strong>Date:</strong> May 21, 2015</div>
+              <div class="message-body">
+                <p>Hi Sami!</p>
+                <p>I'm taking a long trip to Indonesia and Vietnam, from June 19 to July 27 (about 6 weeks). I would like to ask you to take care of Bella (now called Lamp-or-chair, or Lampy for short) for that period. She's a darling and very affectionate, but I worry that she might have separation anxiety so I hesitate to put her in a summer camp or other farm/kennel structure where she would not get personalized attention. She's very friendly with humans, but may be a bit agressive with other dogs (depending on the dogs), so when you walk her, you have to be on the lookout for other dogs and keep her on a tight leash if there is one near her. I'm working on her, to cut the agressivity in the bud, before she expresses it. If you agree, you'd also have to pick her up and bring her back.</p>
+                <p>I would feel much better if you would agree to take Lampy in. Your dad told me you have a dog, so I don't know if the two of them would get along, that's another concern.</p>
+                <p>Thank you Sami and have a good day.<br />Tata Nga</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <p>Lenga’s circle of love extended to her niece, Sam (Sami) Nguyen. During Lenga’s many adventures abroad, Sam was her trusted confidante at home, looking after her beloved pets and ensuring her household remained a sanctuary.</p>
+
+				<p>As a mother, Lenga showed her love through meticulous attention to detail. She was the family's organizer-in-chief, remembering every birthday, coordinating Christmas shopping with multi-email updates, planning elaborate birthday celebrations for others even as she requested "no fuss" for her own. She sent detailed travel itineraries with hotel addresses and flight numbers, reminding her sons to "Print both and keep them preciously on you when travelling." Before one son's trip to Japan, she wrote: "You have to be at the airport 3 hours before departure time, but if you leave the house at 5:00 or 5:15, it only takes 20 min to get to the airport because there is no trafic, so you'll still be ok."</p>
+
+        <p>Her approach to Christmas captured her practical philosophy: “I wish to remind you that our usual practice is to wait till after Christmas to buy costly items and to give cheaper fun items for Christmas. Please note however that present giving is not an obligation and that no one should feel pressured if they don't have the time or the money.”</p>
+
+        <p>When her mother, Ba Mai, died in January 2009, Lenga became the organizer of grief. She sent detailed instructions about the funeral home visits, the white bandanas her sons should wear, the traditional 49-day mourning period. “You are supposed to wear them at all times when you are in public,” she explained. “The purpose is to show to others that you are in mourning, and that you should be excused if you don't greet them as usual.” Even in grief, she was taking care of the details, making sure her sons understood the cultural expectations, the proper way to honor their grandmother.</p>
+      </section>
+
+      <figure class="story-image">
+        <img src="ee447834-c13b-4ea1-8a6c-20f432935af6_preview.jpeg" alt="Lenga Nguyen with family" />
+        <figcaption>A devoted mother and matriarch at heart.</figcaption>
+      </figure>
+
+      <section class="section">
+        <h2>An Adventurous Spirit: The “Blue Hair Chick”</h2>
+        <p>Lenga never lost her sense of adventure. In her sixties, she was still trekking through the world, most notably taking a journey to the world-renowned Son Doong cave in Vietnam.</p>
+        <p>One of the most characteristic stories of Lenga’s resilience occurred during a 2014 trip to Saigon. After being robbed, she didn't focus on the loss; instead, she delighted in the fact that she became a local celebrity known as the “blue hair chick.” She recounted with a laugh how strangers offered her help and how her “uncle from Paris” used his theatrical charm to help her navigate the local bureaucracy to recover her documents. She met life’s hurdles with a story and a smile, never letting a setback dampen her curiosity.</p>
+        <aside class="aside-thread email-collapsed" aria-label="Email thread">
+          <div class="thread-title email-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>Email</span>
+          </div>
+          <div class="thread-body email-content">
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Lenga Nguyen · <strong>To:</strong> Nebu, Forty, Earl · <strong>Date:</strong> Sep 19, 2014</div>
+              <div class="message-body">
+            <p>My uncle from Paris is in Saigon with me. He's been helping me deal with the local bureaucracy to get the permits and papers I need. He's such a riot. A few anecdotes:</p>
+            <p>He can speak vietnamese with a Northern accent and he always uses that accent when speaking wih officials or government agents because he says the North won over the South, so all people in power are from the North. This morning we went to the Immigration service and he explained my case to the agent with a northern accent. But she replied with a southern accent, so my uncle smoothly switched to a southern one. It sounded something like this: By jove, top of the morning to you my bonnie wee lass! Uh.. Uh..wella coulda you helpa an old compadre, mama mia!  I started giggling and he turned to me and said " wassa matter piccola? You no feeling well" with an exaggerated theatrical wink. I had to leave the room before I bursted into laughter and we get both kicked out.</p>
+            <p>To go to that meeting he was all dressed up in a suit and tie. I told him it was not necessary and he said: Shows how much you know. If we get arrested, we can use the jacket as a pillow and the tie as a tourniquet to stop the bleeding after torture.</p>
+            <p>He goes to a pharmacy to buy me medecines without a prescription. When the pharmacist says she needs a prescription, he says Fine, then sell me some rat poison. She foolishly asks What for, he says: Cause i might as well kill myself if i dont get the medication i need to survive. He got the medecines.</p>
+            <p>He came to see me at my hotel with a package of durian. Of course the hotel staff stopped him. He started yelling and crying: I'm a poor durian grower and i'm bringing fhe product of my farm to my favorite niece cause i'm too poor to buy her any other present. But because she had to stay in a fancy shmancy hotel, i cannot show my love to my favorite niece, the daughter of my only brother... He made such a fuss they had to let me take the durian to my room. Its in the fridge in my room. You should see the staff's face when the poor durian farmer showed up this morning in a sharp parisian suit.</p>
+            <p>I already told Forty about the time when my uncle took a bus trip fom Saigon to another city. Midway the bus driver stopped and told my uncle to get off because theyre not going any further. My uncle said Fine, then give me half the money back. They told him to f...off.  He said: Ok, then do me a favor, go buy me 2 liters of gasoline. They foolishly asked What for? He said. So I can burn down your frigging bus! He got his money back.</p>
+            <p>I love my uncle. Hes my role model.</p>
+            <p>Mom/Lenga</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <p>Her travel stories often had a quality of bemused exasperation with chaos. In 2010, she wrote about a disastrous trip to Vung Tau: “We made the mistake of asking Uncle Four to organize the trip and it was a fiasco. He had some friends who had a so-called hotel, so he booked us there. But it wasn't really a hotel...” What followed was a cascade of mishaps—the “hotel” that turned out to be someone's barely converted house, the rooms that weren't ready, the general sense that Uncle Four's friends had wildly oversold their hospitality capabilities. The whole thing became one of those travel stories that's miserable in the moment but makes for excellent retelling later.</p>
+
+        <p>By 2014, she had accumulated so many adventures that she began one email with a line that had become familiar: “You will not believe what just happened to me, I know you must be tired of reading this line, just as I'm tired of writing it, but this is the most incredible action-packed holiday I ever had.”</p>
+      </section>
+
+      <figure class="story-image">
+        <img src="18939890553_b06ac28ae5_c_preview.jpeg" alt="Adventurous spirit memory" />
+        <figcaption>An adventurous spirit and love of exploration.</figcaption>
+      </figure>
+
+      <section class="section">
+        <h2>Personal Passions and Simple Joys</h2>
+        <p>Lenga was a lifelong learner. Her intellectual curiosity led her to study Japanese at Dawson College, where she took several sessions of language and conversation classes, a pursuit she took quite seriously.</p>
+        <p>At home in Montreal, her greatest companions were her dogs. Her corgi, Lamp-or-Chair (also known as Bella), was the light of her life, and she took great care in ensuring the dog had exactly what it needed, from specific chicken-and-rice meals to its favorite treats. In her later years, her “petit chien blanc,” Banh Mi, became her constant shadow, providing her with comfort and companionship through her final chapter.</p>
+        <aside class="aside-thread email-collapsed" aria-label="Email thread">
+          <div class="thread-title email-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>Email</span>
+          </div>
+          <div class="thread-body email-content">
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Flavia Zuccaro · <strong>To:</strong> Lenga Nguyen · <strong>Date:</strong> Dec 10, 2010</div>
+              <div class="message-body">
+                <p>Good morning Lenga,</p>
+                <p>I have received the report of your CT scan and it is entirely normal.</p>
+                <p>Have a great day.</p>
+                <p>Flavia Zuccaro, R.N.<br />Nurse, ICAO</p>
+              </div>
+            </div>
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sick Duck · <strong>To:</strong> Nebu, Forty · <strong>Date:</strong> Dec 10, 2010</div>
+              <div class="message-body">
+                <p>In the words of the wise Schwartzenegger: ..&quot;It is not a tumehr!!!!&quot;</p>
+                <p>So now I have no more excuses for all the stupid things I say or do....</p>
+              </div>
+            </div>
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Nebu · <strong>To:</strong> Sick Duck · <strong>Date:</strong> Dec 19, 2010</div>
+              <div class="message-body">
+                <p>Wait, you thought you might have had a tumor?</p>
+              </div>
+            </div>
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sick Duck · <strong>To:</strong> Nebu · <strong>Date:</strong> Dec 19, 2010</div>
+              <div class="message-body">
+                <p>Yes, for the past 6 months, I thought I had a brain tumor, because I suddenly lost my sense of taste (I can taste sweet, salty, sour, etc.. but all the foods taste the same blandness; that's why I canceled the catering delivery) and I keep having headaches (which I never had before). My brother had 2 brain tumors, one of which was cancerous, so I thought it was genetic or something. But the scan was completely normal. My doctor said my loss of taste could be because I have a stuffed nose, so she gave me a prescription for a nasal spray. And the headache could be because of stress. I don't have a stuffed nose, so I didn't fill the prescription. And that's the end of the story.</p>
+                <p>Mom</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <p>Her humor extended to herself. When a CT scan revealed she didn't have the brain tumor she'd secretly feared for six months (a fear prompted by mysterious loss of taste and persistent headaches), she wrote: “In the words of the wise Schwartzenegger: ..'It is not a tumehr!!!!' So now I have no more excuses for all the stupid things I say or do....”</p>
+        <p>She was practical about health, forwarding miracle drink recipes (carrot, beet root and apple) and articles about diabetes reversal, treating her own medical appointments and body's limitations as just another set of logistics to be managed.</p>
+      </section>
+
+      <figure class="story-image">
+        <img src="IMAG0369.jpg" alt="Butters and Lamp-or-Chair together" />
+        <figcaption>Butters and Lamp-or-Chair, two beloved companions.</figcaption>
+      </figure>
+
+      <section class="section">
+        <h2>Resilience in the Final Years</h2>
+        <p>Lenga’s final years were a testament to her strength. When faced with complex financial challenges involving the CRA and her UN pension, she met them with the support of her family and friends. Though she faced periods of health-related memory loss, she never lost her essential spirit. By the end of 2023, she had regained her stability and was found by those close to her to be in good spirits, remaining the “precious love” of her family.</p>
+        <p>Even as stroke and dementia gradually took their toll, the woman who had been so sharp—forwarding articles, making jokes, planning every detail—remained present in the love and care she had built around her.</p>
+      </section>
+
+      <figure class="story-image">
+        <img src="IMG-20250904-WA0001_preview.jpeg" alt="Resilience in later years" />
+        <figcaption>Strength and resilience through her final years.</figcaption>
+      </figure>
+
+      <section class="section">
+        <h2>Final Wishes</h2>
+        <p>True to her pragmatic nature, Lenga left clear and unsentimental instructions for her passing. She didn't want a fuss; she wanted to be remembered for the life she lived, not the rituals of death. She asked to be cremated or for her body to be donated to science, always thinking of how she could be of use.</p>
+        <aside class="aside-thread email-collapsed" aria-label="Email">
+          <div class="thread-title email-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span>Email</span>
+          </div>
+          <div class="thread-body email-content">
+            <div class="message email-content">
+              <div class="message-meta"><strong>From:</strong> Sick Duck · <strong>To:</strong> Nebu, Forty · <strong>Date:</strong> Feb 3, 2020</div>
+              <div class="message-body">
+                <p><strong>WHAT TO DO IN CASE OF MY DEATH</strong></p>
+                <p>You find me dead. DON’T PANIC.</p>
+                <ol>
+                  <li>Call Dad, wherever he is. If he is abroad, he will try to come back.</li>
+                  <li>In the meantime, call Uncle Phuong, then my aunt (Her name is Neige, she only speaks French).</li>
+                  <li>If you cannot reach anybody, or after you call everybody else, call 9-1-1. Tell them you’ve found me unconscious. They will send an ambulance to get me to the hospital, so the body will not be inside the house.</li>
+                  <li>Dad or Uncle Phuong will take care of the funeral and all the papers. Reminder: I want to be cremated. I have signed my driving licence to donate whatever organ is usable, but I think I will be too old, so I want to donate my body to science and if science doesn’t want it, or if it’s too much trouble, then have it cremated. The ashes can be disposed of as you two want. You can flush them down the toilet for all I care, so it’s up to you. No need to keep them around, so don’t feel guilty or anything about this. I don’t have a will, but I will try to have one drawn and notarised asap. I am leaving all my belongings/estate to you two, to be divided equally. There are companies specializing in estate sales that will get the best price for everything (furniture, jewelry, books, clothes, etc.) in exchange of a cut of the process.</li>
+                  <li>Forty is in charge of any dog(s) living with me at the time of my death. If Forty cannot keep them, his mission is to find them a very good home. I suggest Sami.</li>
+                  <li>Sorry for leaving you two. I will always love you, wherever I am. My last instructions to you two is to always look out for each other, always help each other out, financially or otherwise, for as long as you live. Spouses or girlfriends come and go, but brothers are for ever.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <h2>A Legacy of Love and Language</h2>
+        <p>Lenga Nguyen was a woman who spoke many languages, but her most profound language was the one of care for her sons, devotion to her friends, and an unyielding zest for the next great story. She navigated between worlds—Vietnamese and Canadian, technical and creative, practical and mystical. She chose the online handle “Sick Kwanyin” after the Buddhist bodhisattva of compassion, a name that captured her particular blend of the irreverent and the spiritual.</p>
+        <p>Her legacy lives on in the people she shaped through steady, unglamorous, essential work of paying attention to the details of their lives. In the forwarded articles and health warnings. In the carefully planned birthday celebrations. In the travel itineraries with every detail specified. In the simple phrase “Hi my two booboos”—typed hundreds of times, meaning: I see you, I'm here, I'm paying attention, I love you.</p>
+        <p>She will be deeply missed, but her voice lives on in the stories she wrote and the lives she touched.</p>
+      </section>
+
+      <section class="section">
+        <h2>Video Memories</h2>
+        <div class="grid video-grid">
+          <button class="video-tile" data-video="2cc48cce-d310-4055-991c-03d71fc960ef.mp4" aria-label="Play video memory 1">
+            <video muted playsinline preload="metadata">
+              <source src="2cc48cce-d310-4055-991c-03d71fc960ef.mp4" type="video/mp4" />
+            </video>
+          </button>
+          <button class="video-tile" data-video="45452595-6002-4afd-a7fa-6d6d5e513b02.mp4" aria-label="Play video memory 2">
+            <video muted playsinline preload="metadata">
+              <source src="45452595-6002-4afd-a7fa-6d6d5e513b02.mp4" type="video/mp4" />
+            </video>
+          </button>
+          <button class="video-tile" data-video="2025-08-20 Mom Update.mp4" aria-label="Play video memory 3">
+            <video muted playsinline preload="metadata">
+              <source src="2025-08-20 Mom Update.mp4" type="video/mp4" />
+            </video>
+          </button>
+          <button class="video-tile" data-video="2025-08-20 Mom Update 2.mp4" aria-label="Play video memory 4">
+            <video muted playsinline preload="metadata">
+              <source src="2025-08-20 Mom Update 2.mp4" type="video/mp4" />
+            </video>
+          </button>
+          <button class="video-tile" data-video="f3bd3c3e-dd05-4ab4-b9e5-952950f743a0.mp4" aria-label="Play video memory 5">
+            <video muted playsinline preload="metadata">
+              <source src="f3bd3c3e-dd05-4ab4-b9e5-952950f743a0.mp4" type="video/mp4" />
+            </video>
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Photo Memories</h2>
+        <div class="grid photo-grid">
+          <button class="photo-tile" data-photo="2013-10-14_11-52-39_preview.jpeg" aria-label="Open memory photo 1">
+            <img src="2013-10-14_11-52-39_preview.jpeg" alt="Memory photo 1" />
+          </button>
+          <button class="photo-tile" data-photo="2023-06-16-IMG_5829_preview.jpeg" aria-label="Open memory photo 2">
+            <img src="2023-06-16-IMG_5829_preview.jpeg" alt="Memory photo 2" />
+          </button>
+          <button class="photo-tile" data-photo="IMG-20250904-WA0000_preview.jpeg" aria-label="Open memory photo 3">
+            <img src="IMG-20250904-WA0000_preview.jpeg" alt="Memory photo 3" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0290_preview.jpeg" aria-label="Open memory photo 4">
+            <img src="IMG_0290_preview.jpeg" alt="Memory photo 4" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0342_preview.jpeg" aria-label="Open memory photo 5">
+            <img src="IMG_0342_preview.jpeg" alt="Memory photo 5" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0343_preview.jpeg" aria-label="Open memory photo 6">
+            <img src="IMG_0343_preview.jpeg" alt="Memory photo 6" />
+          </button>
+          <button class="photo-tile" data-photo="WP_20150118_051_preview.jpeg" aria-label="Open memory photo 7">
+            <img src="WP_20150118_051_preview.jpeg" alt="Memory photo 7" />
+          </button>
+          <button class="photo-tile" data-photo="20250719_162446_preview.jpeg" aria-label="Open memory photo 8">
+            <img src="20250719_162446_preview.jpeg" alt="Memory photo 8" />
+          </button>
+          <button class="photo-tile" data-photo="975595_10152908503100201_2089101196_n_preview.jpeg" aria-label="Open memory photo 9">
+            <img src="975595_10152908503100201_2089101196_n_preview.jpeg" alt="Memory photo 9" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0287_preview.jpeg" aria-label="Open memory photo 10">
+            <img src="IMG_0287_preview.jpeg" alt="Memory photo 10" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0301_preview.jpeg" aria-label="Open memory photo 11">
+            <img src="IMG_0301_preview.jpeg" alt="Memory photo 11" />
+          </button>
+          <button class="photo-tile" data-photo="IMG_0341_preview.jpeg" aria-label="Open memory photo 12">
+            <img src="IMG_0341_preview.jpeg" alt="Memory photo 12" />
+          </button>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer">
+    With love, remembrance, and gratitude.
+  </footer>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Video memory">
+      <button class="modal-close" type="button" aria-label="Close video">×</button>
+      <video id="modalVideo" controls preload="metadata"></video>
+    </div>
+  </div>
+
+  <div class="modal" id="photoModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Photo memory">
+      <button class="modal-close" type="button" aria-label="Close photo">×</button>
+      <img id="modalPhoto" alt="Expanded memory photo" />
+    </div>
+  </div>
+
+  <div class="modal" id="emailModal" aria-hidden="true">
+    <div class="modal-content email-modal-content" role="dialog" aria-modal="true" aria-label="Email">
+      <button class="modal-close" type="button" aria-label="Close email">×</button>
+      <div id="modalEmail" class="email-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const closeBtn = modal.querySelector(".modal-close");
+    const photoModal = document.getElementById("photoModal");
+    const modalPhoto = document.getElementById("modalPhoto");
+    const photoCloseBtn = photoModal.querySelector(".modal-close");
+    const hero = document.querySelector(".hero");
+    const emailModal = document.getElementById("emailModal");
+    const modalEmail = document.getElementById("modalEmail");
+    const emailCloseBtn = emailModal.querySelector(".modal-close");
+
+    const openModal = (src) => {
+      modalVideo.innerHTML = "";
+      const source = document.createElement("source");
+      source.src = src;
+      source.type = "video/mp4";
+      modalVideo.appendChild(source);
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      modalVideo.load();
+      modalVideo.play().catch(() => {});
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      modalVideo.pause();
+      modalVideo.removeAttribute("src");
+      modalVideo.innerHTML = "";
+    };
+
+    const openPhotoModal = (src) => {
+      modalPhoto.src = src;
+      photoModal.classList.add("open");
+      photoModal.setAttribute("aria-hidden", "false");
+    };
+
+    const closePhotoModal = () => {
+      photoModal.classList.remove("open");
+      photoModal.setAttribute("aria-hidden", "true");
+      modalPhoto.removeAttribute("src");
+    };
+
+    const openEmailModal = (widget) => {
+      modalEmail.innerHTML = "";
+      const clone = widget.cloneNode(true);
+      clone.classList.remove("email-collapsed");
+      modalEmail.appendChild(clone);
+      emailModal.classList.add("open");
+      emailModal.setAttribute("aria-hidden", "false");
+    };
+
+    const closeEmailModal = () => {
+      emailModal.classList.remove("open");
+      emailModal.setAttribute("aria-hidden", "true");
+      modalEmail.innerHTML = "";
+    };
+
+    document.querySelectorAll(".video-tile").forEach((tile) => {
+      tile.addEventListener("click", () => openModal(tile.dataset.video));
+    });
+
+    document.querySelectorAll(".photo-tile").forEach((tile) => {
+      tile.addEventListener("click", () => openPhotoModal(tile.dataset.photo));
+    });
+
+    document.querySelectorAll(".aside-email, .aside-thread").forEach((widget) => {
+      widget.addEventListener("click", () => openEmailModal(widget));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    photoCloseBtn.addEventListener("click", closePhotoModal);
+    photoModal.addEventListener("click", (event) => {
+      if (event.target === photoModal) closePhotoModal();
+    });
+
+    emailCloseBtn.addEventListener("click", closeEmailModal);
+    emailModal.addEventListener("click", (event) => {
+      if (event.target === emailModal) closeEmailModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeModal();
+      }
+      if (event.key === "Escape" && photoModal.classList.contains("open")) {
+        closePhotoModal();
+      }
+      if (event.key === "Escape" && emailModal.classList.contains("open")) {
+        closeEmailModal();
+      }
+    });
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const updateHero = () => {
+      const heroHeight = hero.offsetHeight || window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const dimProgress = clamp(scrollY / (heroHeight * 0.6), 0, 1);
+      const textProgress = clamp(scrollY / (heroHeight * 0.22), 0, 1);
+
+      hero.style.setProperty("--hero-dim", (dimProgress * 0.85).toFixed(3));
+      hero.style.setProperty("--hero-text-opacity", textProgress.toFixed(3));
+      hero.style.setProperty("--hero-text-translate", `${(1 - textProgress) * 24}px`);
+    };
+
+    const onScroll = () => {
+      window.requestAnimationFrame(updateHero);
+    };
+
+    updateHero();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateHero);
+  </script>
+</body>
+</html>
